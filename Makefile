@@ -51,6 +51,22 @@ postsubmit-build: setup
 		--artifact-bucket=$(ARTIFACT_BUCKET) \
 		--dry-run=false
 
+.PHONY: generate-pkg-number
+generate-pkg-number:
+	#go build cmd/release
+	go vet cmd/release
+	go run cmd/release/releaseNumber.go \
+		--pkg-branch=$(RELEASE_BRANCH) \
+		--pkg-environment=$(RELEASE_ENVIRONMENT)
+
+#.PHONY: generate-release-number
+#generate-release-number:
+#	go build releasecmd
+#	go vet releasecmd
+#	go run releasecmd/main.go \
+#		--release-branch=$(RELEASE_BRANCH) \
+#		--release-environment=$(RELEASE_ENVIRONMENT)
+
 .PHONY: postsubmit-conformance
 postsubmit-conformance: postsubmit-build
 	development/kops/prow.sh
