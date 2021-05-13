@@ -51,6 +51,22 @@ postsubmit-build: setup
 		--artifact-bucket=$(ARTIFACT_BUCKET) \
 		--dry-run=false
 
+
+.PHONY: generate-pkg-number
+generate-pkg-number:
+	#go build cmd/release
+	go vet ./cmd/release/number
+	go run ./cmd/release/number/main.go \
+		--pkg-branch=$(RELEASE_BRANCH) \
+		--pkg-environment=$(RELEASE_ENVIRONMENT)
+
+.PHONY: restore-things
+restore-things:
+	git restore release/$(RELEASE_BRANCH)/development/RELEASE
+	git restore projects/kubernetes/kubernetes/$(RELEASE_BRANCH)/KUBE_GIT_VERSION_FILE
+	rm -rf docs/contents/releases/$(RELEASE_BRANCH)/5
+	rm -rf docs/contents/releases/$(RELEASE_BRANCH)/6
+
 .PHONY: postsubmit-conformance
 postsubmit-conformance: postsubmit-build
 	development/kops/prow.sh
