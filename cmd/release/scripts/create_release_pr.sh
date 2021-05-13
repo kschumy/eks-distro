@@ -82,5 +82,5 @@ git push origin "${PR_BRANCH}"
 PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
 if [ "${PR_EXISTS}" -eq 0 ]; then
   echo "NO PR YET"
-  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --draft --repo "ksshumy/${PR_BRANCH}"
+  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --draft --repo "kschumy/eks-distro"
 fi
