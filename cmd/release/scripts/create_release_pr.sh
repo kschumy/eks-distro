@@ -21,6 +21,13 @@ RELEASE_FILEPATH="${1?....}"
 RELEASE_ENVIRONMENT="${2?Should be 'development' or 'production'}"
 RELEASE_VERSION="${3?Release branch}"
 
+function cleanup {
+  echo "TRAPPPPPPPED"
+#  rm  -r /tmp/foo
+}
+
+trap cleanup ERR
+
 echo "hellooo"
 
 IS_BOT=false
