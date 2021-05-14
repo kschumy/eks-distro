@@ -59,6 +59,11 @@ EOF
 
 git checkout -b $PR_BRANCH
 
+git fetch upstream
+# there will be conflicts before we are on the bots fork at this point
+# -Xtheirs instructs git to favor the changes from the current branch
+git rebase -Xtheirs upstream/main
+
 if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   git add "${RELEASE_FILEPATH}"
   if [[ $(git diff --staged --name-only) == "" ]]; then
