@@ -57,7 +57,7 @@ fi
 
 git status
 echo "pushing..."
-git push origin "${PR_BRANCH}"
+git push origin $PR_BRANCH
 
 PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
 if [ "${PR_EXISTS}" -eq 0 ]; then
