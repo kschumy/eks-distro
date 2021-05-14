@@ -63,7 +63,7 @@ else
 fi
 
 echo "pushing..."
-git push -f origin ${PR_BRANCH}
+git push origin ${PR_BRANCH}
 
 #echo $PR_BRANCH
 echo "pushing?"
