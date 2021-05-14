@@ -38,7 +38,7 @@ By submitting this pull request, I confirm that you can use, modify, copy, and r
 EOF
 )
 #
-PR_BRANCH="automate-release-number-final" #"increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update" #"increment-development-RELEASE-1.19-28"
+PR_BRANCH="automate-release-number-final-two" #"increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update" #"increment-development-RELEASE-1.19-28"
 
 git checkout -B $PR_BRANCH
 
