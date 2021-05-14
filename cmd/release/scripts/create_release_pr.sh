@@ -38,11 +38,12 @@ By submitting this pull request, I confirm that you can use, modify, copy, and r
 EOF
 )
 #
-PR_BRANCH="automate-release-number-final-two" #"increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update" #"increment-development-RELEASE-1.19-28"
+PR_BRANCH="increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update" #"increment-development-RELEASE-1.19-28"
+
+echo $PR_BRANCH
 
 git checkout -B $PR_BRANCH
 
-sleep 4
 
 if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   git add "${RELEASE_FILEPATH}"
