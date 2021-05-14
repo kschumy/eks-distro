@@ -48,7 +48,7 @@ By submitting this pull request, I confirm that you can use, modify, copy, and r
 EOF
 )
 
-git checkout -B $PR_BRANCH
+git checkout -b $PR_BRANCH
 
 if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   git add "${RELEASE_FILEPATH}"
@@ -71,6 +71,6 @@ PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
 if [ "${PR_EXISTS}" -eq 0 ]; then
   echo "INSIDE"
 #  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web --repo "${ORIGIN_ORG}/eks-distro"
-  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web  --repo "aws/eks-distro" --head "main"
+  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web  --repo "aws/eks-distro"
 
 fi
