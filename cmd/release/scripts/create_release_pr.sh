@@ -42,7 +42,7 @@ PR_BRANCH="automate-release-number-final-two" #"increment-${RELEASE_ENVIRONMENT}
 
 git checkout -B $PR_BRANCH
 
-exit 2
+sleep 4
 
 if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   git add "${RELEASE_FILEPATH}"
