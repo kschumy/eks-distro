@@ -24,53 +24,61 @@ RELEASE_VERSION="${3?Release branch}"
 ORIGINAL_BRANCH=$(git branch --show-current)
 PR_BRANCH="increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update" #"increment-development-RELEASE-1.19-28"
 
-function cleanup {
-  echo "TRAPPPPPPPED"
-  git checkout HEAD^ -- "${RELEASE_FILEPATH}"
-  git co $ORIGINAL_BRANCH
-  #  rm  -r /tmp/foo
-}
 
-trap cleanup ERR
 
-echo "hellooo"
-
-ORIGIN_ORG=$(git remote get-url origin | sed -n -e "s|git@github.com:\(.*\)/eks-distro.git|\1|p")
-
-PR_TITLE="Increment ${RELEASE_ENVIRONMENT} RELEASE for ${RELEASE_VERSION}"
-COMMIT_MESSAGE="TEST!! [PR BOT] Increment RELEASE for"
+    if [[ -z  $(git ls-remote --heads origin ${PR_BRANCH}) ]]; then
+        echo "YES"
+    else
+        echo "NO"
+    fi
 #
-PR_BODY=$(
-  cat <<EOF
-TEST!! Bumping RELEASE version
-
-By submitting this pull request, I confirm that you can use, modify, copy, and redistribute this contribution, under the terms of your choice.
-EOF
-)
-
-git checkout -b $PR_BRANCH
-
-if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
-  git add "${RELEASE_FILEPATH}"
-  if [[ $(git diff --staged --name-only) == "" ]]; then
-    exit 0
-  fi
-  git commit -m "${COMMIT_MESSAGE}" || true
-else
-  git restore "${RELEASE_FILEPATH}"
-  echo "Unexpected files."
-  echo "Restored ${RELEASE_FILEPATH}"
-  exit 1
-fi
-
-echo "pushing..."
-git push origin -f ${PR_BRANCH}
-echo "pushed!"
-
-PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
-if [ "${PR_EXISTS}" -eq 0 ]; then
-  echo "INSIDE"
-#  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web --repo "${ORIGIN_ORG}/eks-distro"
-  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web  --repo "aws/eks-distro"
-
-fi
+#function cleanup {
+#  echo "TRAPPPPPPPED"
+#  git checkout HEAD^ -- "${RELEASE_FILEPATH}"
+#  git co $ORIGINAL_BRANCH
+#  #  rm  -r /tmp/foo
+#}
+#
+#trap cleanup ERR
+#
+#echo "hellooo"
+#
+#ORIGIN_ORG=$(git remote get-url origin | sed -n -e "s|git@github.com:\(.*\)/eks-distro.git|\1|p")
+#
+#PR_TITLE="Increment ${RELEASE_ENVIRONMENT} RELEASE for ${RELEASE_VERSION}"
+#COMMIT_MESSAGE="TEST!! [PR BOT] Increment RELEASE for"
+##
+#PR_BODY=$(
+#  cat <<EOF
+#TEST!! Bumping RELEASE version
+#
+#By submitting this pull request, I confirm that you can use, modify, copy, and redistribute this contribution, under the terms of your choice.
+#EOF
+#)
+#
+#git checkout -b $PR_BRANCH
+#
+#if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
+#  git add "${RELEASE_FILEPATH}"
+#  if [[ $(git diff --staged --name-only) == "" ]]; then
+#    exit 0
+#  fi
+#  git commit -m "${COMMIT_MESSAGE}" || true
+#else
+#  git restore "${RELEASE_FILEPATH}"
+#  echo "Unexpected files."
+#  echo "Restored ${RELEASE_FILEPATH}"
+#  exit 1
+#fi
+#
+#echo "pushing..."
+#git push origin -f ${PR_BRANCH}
+#echo "pushed!"
+#
+#PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
+#if [ "${PR_EXISTS}" -eq 0 ]; then
+#  echo "INSIDE"
+##  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web --repo "${ORIGIN_ORG}/eks-distro"
+#  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web  --repo "aws/eks-distro"
+#
+#fi
