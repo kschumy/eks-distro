@@ -71,6 +71,6 @@ PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
 if [ "${PR_EXISTS}" -eq 0 ]; then
   echo "INSIDE"
 #  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web --repo "${ORIGIN_ORG}/eks-distro"
-  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web  --repo "${ORIGIN_ORG}/eks-distro" --head "${PR_BRANCH}"
+  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web  --repo "aws/eks-distro" --head "${PR_BRANCH}"
 
 fi
