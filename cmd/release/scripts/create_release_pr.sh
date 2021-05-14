@@ -39,8 +39,10 @@ EOF
 )
 #
 PR_BRANCH="increment-development-RELEASE-1.19-28" #"increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update"
+  echo "BEFORE"
 
 git checkout -b $PR_BRANCH
+  echo "AFTER"
 
 if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   git add "${RELEASE_FILEPATH}"
