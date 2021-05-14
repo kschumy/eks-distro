@@ -35,7 +35,7 @@ function cleanup {
   git checkout HEAD^ -- "${RELEASE_FILEPATH}"
 
   git co $ORIGINAL_BRANCH
-  git push -d origin ${PR_BRANCH}
+#  git push -d origin ${PR_BRANCH}
   git br -D ${PR_BRANCH}
   #  rm  -r /tmp/foo
 }
