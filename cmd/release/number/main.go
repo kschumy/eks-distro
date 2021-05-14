@@ -83,8 +83,8 @@ func main() {
 	//if !c.dryRun {
 	err = cmdTwo.Run()
 	if err != nil {
-		resetPath := "checkout HEAD^ -- " + release.EnvironmentReleasePath
-		exec.Command("git", resetPath)
+		//resetPath := "checkout HEAD^ -- " + release.EnvironmentReleasePath
+		//exec.Command("git", resetPath)
 		log.Fatalf("Error running make: %v", err)
 
 	}
