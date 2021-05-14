@@ -62,7 +62,7 @@ git push origin $PR_BRANCH
 echo $PR_BRANCH
 echo "pushing?"
 
-PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
+PR_EXISTS=$(gh pr list | grep -c "$PR_BRANCH" || true)
   echo "PR_EXISTS?"
   echo $PR_EXISTS
 
