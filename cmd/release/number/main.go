@@ -3,12 +3,17 @@ package main
 import (
 	//releaseUtils "../internal"
 	releaseManager "../release_manager"
-	"log"
-	"os"
-
 	"flag"
 	"fmt"
+	"io"
+	"log"
+	"os"
 	"os/exec"
+)
+
+var (
+	outputStream io.Writer = os.Stdout
+	errStream    io.Writer = os.Stderr
 )
 
 type Input struct {
@@ -49,15 +54,36 @@ func main() {
 	pathway := rootdir + "/cmd/release/scripts/create_release_pr.sh"
 	fmt.Println(pathway)
 
-	cmd, err := exec.Command(
-		"/bin/bash", pathway,
-		release.EnvironmentReleasePath,
-		release.Environment,
-		release.Version,
-	).Output()
+	//cmd, err := exec.Command(
+	//	"/bin/bash", pathway,
+	//	release.EnvironmentReleasePath,
+	//	release.Environment,
+	//	release.Version,
+	//).Output()
+	//if err != nil {
+	//	fmt.Printf("error %s", err)
+	//}
+	//output := string(cmd)
+	//fmt.Println(output)
+
+	//c.makeArgs = []string{
+	//	fmt.Sprintf("RELEASE_BRANCH=%s", c.releaseBranch),
+	//	fmt.Sprintf("RELEASE=%s", c.release),
+	//	fmt.Sprintf("AWS_REGION=%s", *region),
+	//	fmt.Sprintf("AWS_ACCOUNT_ID=%s", *accountId),
+	//	fmt.Sprintf("IMAGE_REPO=%s", *imageRepo),
+	//}
+
+	//commandlrgs = append(commandArgs, c.makeArgs...)
+
+	cmdTwo := exec.Command("/bin/bash", pathway, release.EnvironmentReleasePath, release.Environment, release.Version)
+	//log.Printf("Executing: %s", strings.Join(cmd.Args, " "))
+	cmdTwo.Stdout = outputStream
+	cmdTwo.Stderr = errStream
+	//if !c.dryRun {
+	err = cmdTwo.Run()
 	if err != nil {
-		fmt.Printf("error %s", err)
+		log.Fatalf("Error running make: %v", err)
+
 	}
-	output := string(cmd)
-	fmt.Println(output)
 }
