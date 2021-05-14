@@ -79,7 +79,7 @@ else
 fi
 
 echo "pushing..."
-git push origin -f ${PR_BRANCH}
+git push origin -f ${PR_BRANCH} | grep "distro"
 echo "pushed!"
 
 PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
