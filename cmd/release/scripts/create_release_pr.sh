@@ -51,10 +51,10 @@ if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   fi
   git commit -m "${COMMIT_MESSAGE}" || true
 
-  git fetch upstream
-  # there will be conflicts before we are on the bots fork at this point
-  # -Xtheirs instructs git to favor the changes from the current branch
-  git rebase -Xtheirs upstream/main
+#  git fetch upstream
+#  # there will be conflicts before we are on the bots fork at this point
+#  # -Xtheirs instructs git to favor the changes from the current branch
+#  git rebase -Xtheirs upstream/main
 else
   git restore "${RELEASE_FILEPATH}"
   echo "Unexpected files."
@@ -63,7 +63,7 @@ else
 fi
 
 echo "pushing..."
-git push origin ${PR_BRANCH}
+git push -f origin ${PR_BRANCH}
 
 #echo $PR_BRANCH
 echo "pushing?"
