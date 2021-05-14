@@ -38,8 +38,7 @@ By submitting this pull request, I confirm that you can use, modify, copy, and r
 EOF
 )
 #
-PR_BRANCH="increment-development-RELEASE-1.19-28" #"increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update"
-  echo "BEFORE"
+PR_BRANCH="automated-release-update" #"increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update" #"increment-development-RELEASE-1.19-28"
 
 git checkout -B $PR_BRANCH
 
@@ -57,6 +56,7 @@ else
 fi
 
 git status
+echo "pushing..."
 git push origin "${PR_BRANCH}"
 
 PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
