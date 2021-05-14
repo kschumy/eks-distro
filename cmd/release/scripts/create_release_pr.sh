@@ -64,7 +64,7 @@ else
 fi
 
 echo "pushing..."
-git push origin ${PR_BRANCH}
+git push origin -f ${PR_BRANCH}
 echo "pushed!"
 
 PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
