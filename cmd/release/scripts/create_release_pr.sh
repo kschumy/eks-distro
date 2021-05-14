@@ -58,17 +58,17 @@ else
   exit 1
 fi
 
-#echo "pushing..."
-#git push origin ${PR_BRANCH}
-#
-##echo $PR_BRANCH
-#echo "pushing?"
-#
-#PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
-#  echo "PR_EXISTS?"
-#  echo $PR_EXISTS
-#
-#if [ "${PR_EXISTS}" -eq 0 ]; then
-#    echo "INSIDE"
-#  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web --repo "aws/eks-distro"
-#fi
+echo "pushing..."
+git push origin ${PR_BRANCH}
+
+#echo $PR_BRANCH
+echo "pushing?"
+
+PR_EXISTS=$(gh pr list | grep -c "${PR_BRANCH}" || true)
+  echo "PR_EXISTS?"
+  echo $PR_EXISTS
+
+if [ "${PR_EXISTS}" -eq 0 ]; then
+    echo "INSIDE"
+  gh pr create --title "${PR_TITLE}" --body "${PR_BODY}" --web --repo "aws/eks-distro"
+fi
