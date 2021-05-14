@@ -42,7 +42,7 @@ func main() {
 
 	err = os.WriteFile(release.EnvironmentReleasePath, []byte(release.Number+"\n"), 0644)
 	if err != nil {
-
+		log.Fatalf("error wrirting to RELEASE: %v", err)
 	}
 	rootdir := releaseManager.GetGitRootDirectory()
 
@@ -50,7 +50,7 @@ func main() {
 	fmt.Println(pathway)
 
 	cmd, err := exec.Command(
-		"/bin/bash",
+		"/bin/bash", pathway,
 		release.EnvironmentReleasePath,
 		release.Environment,
 		release.Version,

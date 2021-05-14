@@ -22,6 +22,8 @@ RELEASE_ENVIRONMENT="${2?Should be 'development' or 'production'}"
 RELEASE_VERSION="${3?Release branch}"
 
 
+echo "hellooo"
+
 IS_BOT=false
 
 ORIGIN_ORG=$(git remote get-url origin | sed -n -e "s|git@github.com:\(.*\)/eks-distro.git|\1|p")
@@ -38,7 +40,7 @@ EOF
 #
 PR_BRANCH="increment-${RELEASE_ENVIRONMENT}-RELEASE-${RELEASE_VERSION}" #"automated-release-update"
 
-git checkout -b $PR_BRANCH
+#git checkout -b $PR_BRANCH
 
 if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   git add "${RELEASE_FILEPATH}"

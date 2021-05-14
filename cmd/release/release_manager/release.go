@@ -47,6 +47,8 @@ func IntiRelease(input ReleaseInput) (*Release, error) {
 
 	release.Version = createReleaseVersion(release)
 
+	log.Printf("populated release with %q\n", release)
+
 	return release, nil
 }
 
