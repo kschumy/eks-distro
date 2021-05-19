@@ -59,6 +59,7 @@ EOF
 
 git checkout -b $PR_BRANCH
 
+git branch --all | grep "^  remotes/origin/increment-development-RELEASE-1.19-\$"
 
 if [[ "$(git status --porcelain | wc -l)" -eq 1 ]]; then
   git add "${RELEASE_FILEPATH}"
